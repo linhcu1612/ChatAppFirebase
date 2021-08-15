@@ -12,23 +12,23 @@ export default function AuthProvider({ children }) {
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
 
-  // useEffect(() => {
-  //   const unsubcribed = auth.onAuthStateChanged((user) => {
-  //     if (user) {
-  //       const { displayName, email, uid, photoURL } = user;
-  //       setIsLoading(false);
-  //       setUser({ displayName, email, uid, photoURL });
-  //       history.push("/");
-  //        return
-  //     }
-  //     setUser({});
-  //     setIsLoading(false);
-  //     history.push("/login");
-  //   });
-  //   return () => {
-  //     unsubcribed();
-  //   };
-  // }, [history]);
+  useEffect(() => {
+    const unsubcribed = auth.onAuthStateChanged((user) => {
+      if (user) {
+        const { displayName, email, uid, photoURL } = user;
+        setIsLoading(false);
+        setUser({ displayName, email, uid, photoURL });
+        history.push("/");
+        return;
+      }
+      setUser({});
+      setIsLoading(false);
+      history.push("/login");
+    });
+    return () => {
+      unsubcribed();
+    };
+  }, [history]);
 
   return (
     <AuthContext.Provider value={user}>
