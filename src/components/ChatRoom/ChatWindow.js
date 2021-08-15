@@ -1,7 +1,121 @@
 /** @format */
 
 import React from "react";
+import styled from "styled-components";
+import { UserAddOutlined } from "@ant-design/icons";
+import { Button, Avatar, Tooltip, Form, Input } from "antd";
+import Message from "./Message";
+
+const { Item } = Form;
+
+const { Group } = Avatar;
+
+const HeaderStyled = styled.div`
+  display: flex;
+  justify-content: space-between;
+  height: 56px;
+  padding: 0 16px;
+  align-items: center;
+  border-bottom: 1px solid rgb(230, 230, 230);
+
+  .header {
+    &__info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    &__title {
+      margin: 0;
+      font-weight: bold;
+    }
+
+    &__description {
+      font-size: 12px;
+    }
+  }
+`;
+
+const ButtonGroupStyled = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const MessageListStyled = styled.div`
+  max-height: 100%;
+  overflow-y: auto;
+`;
+
+const ContentStyled = styled.div`
+  height: calc(100% - 56px);
+  display: flex;
+  flex-direction: column;
+  padding: 11px;
+  justify-content: flex-end;
+`;
+
+const FormStyled = styled(Form)`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px 2px 2px 0;
+  border: 1px solid rgb(230, 230, 230);
+  border-radius: 2px;
+
+  .ant-form-item {
+    flex: 1;
+    margin-bottom: 0;
+  }
+`;
 
 export default function ChatWindow() {
-  return <div>This is Chat Window</div>;
+  return (
+    <>
+      <HeaderStyled>
+        <div className='header__info'>
+          <p className='header__title'>Room 1</p>
+          <span className='header__description'>Day la room 1</span>
+        </div>
+        <ButtonGroupStyled>
+          <Button type='text' icon={<UserAddOutlined />}>
+            Invite
+          </Button>
+          <Group size='small' maxCount={2}>
+            <Tooltip title='1'>
+              <Avatar>1</Avatar>
+            </Tooltip>
+            <Tooltip title='2'>
+              <Avatar>2</Avatar>
+            </Tooltip>
+            <Tooltip title='2'>
+              <Avatar>2</Avatar>
+            </Tooltip>
+            <Tooltip title='2'>
+              <Avatar>2</Avatar>
+            </Tooltip>
+          </Group>
+        </ButtonGroupStyled>
+      </HeaderStyled>
+      <ContentStyled>
+        <MessageListStyled>
+          <Message
+            text='Test'
+            photoURL={null}
+            displayName='Linh'
+            createdAt={1212121212}
+          />
+        </MessageListStyled>
+        <FormStyled>
+          <Item>
+            <Input
+              bordered={false}
+              autoComplete='off'
+              placeholder='Text Message'
+            />
+          </Item>
+          <Button>Send</Button>
+        </FormStyled>
+      </ContentStyled>
+    </>
+  );
 }
