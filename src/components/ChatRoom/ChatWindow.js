@@ -117,7 +117,7 @@ export default function ChatWindow() {
               placeholder='Text Message'
             />
           </Item>
-          <Button>Send</Button>
+          <Button type='primary'>Send</Button>
         </FormStyled>
       </ContentStyled>
     </WrapperStyled>
