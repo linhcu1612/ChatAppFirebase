@@ -12,6 +12,7 @@ const useFirestore = (collection, condition) => {
     if (condition) {
       const { fieldName, operator, compareValue } = condition;
       if (!compareValue || !compareValue.length) {
+        setDocuments([]);
         return;
       }
       conditionRef = conditionRef.where(fieldName, operator, compareValue);

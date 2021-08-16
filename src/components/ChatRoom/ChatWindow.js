@@ -1,10 +1,11 @@
 /** @format */
 
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { UserAddOutlined } from "@ant-design/icons";
 import { Button, Avatar, Tooltip, Form, Input } from "antd";
 import Message from "./Message";
+import { AppContext } from "Context/AppProvider";
 
 const { Item } = Form;
 
@@ -73,30 +74,26 @@ const FormStyled = styled(Form)`
 `;
 
 export default function ChatWindow() {
+  const { selectedRoom, members } = useContext(AppContext);
+
+  const { name, description } = selectedRoom;
   return (
     <WrapperStyled>
       <HeaderStyled>
         <div className='header__info'>
-          <p className='header__title'>Room 1</p>
-          <span className='header__description'>Day la room 1</span>
+          <p className='header__title'>{name}</p>
+          <span className='header__description'>{description}</span>
         </div>
         <ButtonGroupStyled>
           <Button type='text' icon={<UserAddOutlined />}>
             Invite
           </Button>
           <Group size='small' maxCount={2}>
-            <Tooltip title='1'>
-              <Avatar>1</Avatar>
-            </Tooltip>
-            <Tooltip title='2'>
-              <Avatar>2</Avatar>
-            </Tooltip>
-            <Tooltip title='2'>
-              <Avatar>2</Avatar>
-            </Tooltip>
-            <Tooltip title='2'>
-              <Avatar>2</Avatar>
-            </Tooltip>
+            {members.map(({ displayName, uid }) => (
+              <Tooltip title={displayName} key={uid}>
+                <Avatar>{displayName.charAt(0).toUpperCase()}</Avatar>
+              </Tooltip>
+            ))}
           </Group>
         </ButtonGroupStyled>
       </HeaderStyled>

@@ -17,7 +17,7 @@ export default function Login() {
         displayName: user.displayName,
         email: user.email,
         photoURL: user.photoURL,
-        uid: user.displayName,
+        uid: user.uid,
         providerId: additionalUserInfo.providerId,
       });
     }
