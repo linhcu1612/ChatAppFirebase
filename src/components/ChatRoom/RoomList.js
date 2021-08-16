@@ -33,7 +33,11 @@ const LinkStyled = styled(Link)`
 `;
 
 export default function RoomList() {
-  const { rooms } = useContext(AppContext);
+  const { rooms, setIsAddRoomVisible } = useContext(AppContext);
+
+  const handleAddRoom = () => {
+    setIsAddRoomVisible(true);
+  };
 
   return (
     <Collapse ghost defaultActiveKey={["1"]}>
@@ -41,7 +45,11 @@ export default function RoomList() {
         {rooms.map((room) => (
           <LinkStyled key={room.id}>{room.name}</LinkStyled>
         ))}
-        <Button type='text' icon={<PlusSquareOutlined />} className='add-room'>
+        <Button
+          type='text'
+          icon={<PlusSquareOutlined />}
+          className='add-room'
+          onClick={handleAddRoom}>
           Add Room
         </Button>
       </PanelStyled>
