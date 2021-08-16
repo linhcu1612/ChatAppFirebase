@@ -1,8 +1,8 @@
 /** @format */
-import firebase, { auth } from "../../firebase/config";
+import firebase, { auth } from "firebase/config";
 import React from "react";
 import { Row, Col, Typography, Button } from "antd";
-import { addDocument } from "../../firebase/services";
+import { addDocument } from "firebase/services";
 
 const { Title } = Typography;
 

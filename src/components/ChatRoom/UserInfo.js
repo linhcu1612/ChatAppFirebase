@@ -18,14 +18,14 @@ const WrapperStyled = styled.div`
 `;
 
 export default function UserInfo() {
-  useEffect(() => {
-    db.collection("users").onSnapshot((snapshot) => {
-      const data = snapshot.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
-    });
-  }, []);
+  // useEffect(() => {
+  //   db.collection("users").onSnapshot((snapshot) => {
+  //     const data = snapshot.docs.map((doc) => ({
+  //       ...doc.data(),
+  //       id: doc.id,
+  //     }));
+  //   });
+  // }, []);
 
   return (
     <WrapperStyled>
