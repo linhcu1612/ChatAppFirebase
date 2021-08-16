@@ -54,6 +54,10 @@ const ContentStyled = styled.div`
   justify-content: flex-end;
 `;
 
+const WrapperStyled = styled.div`
+  height: 100vh;
+`;
+
 const FormStyled = styled(Form)`
   display: flex;
   justify-content: space-between;
@@ -70,7 +74,7 @@ const FormStyled = styled(Form)`
 
 export default function ChatWindow() {
   return (
-    <>
+    <WrapperStyled>
       <HeaderStyled>
         <div className='header__info'>
           <p className='header__title'>Room 1</p>
@@ -116,6 +120,6 @@ export default function ChatWindow() {
           <Button>Send</Button>
         </FormStyled>
       </ContentStyled>
-    </>
+    </WrapperStyled>
   );
 }
