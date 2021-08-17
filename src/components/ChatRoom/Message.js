@@ -3,6 +3,7 @@
 import React from "react";
 import { Avatar, Typography } from "antd";
 import styled from "styled-components";
+import { formatRelative } from "date-fns/esm";
 
 const { Text } = Typography;
 
@@ -25,6 +26,19 @@ const WrapperStyled = styled.div`
   }
 `;
 
+function formatDate(seconds) {
+  let formattedDate = "";
+
+  if (seconds) {
+    formattedDate = formatRelative(new Date(seconds * 1000), new Date());
+
+    formattedDate =
+      formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
+  }
+
+  return formattedDate;
+}
+
 export default function Message({ text, displayName, createdAt, photoURL }) {
   return (
     <WrapperStyled>
@@ -33,7 +47,7 @@ export default function Message({ text, displayName, createdAt, photoURL }) {
           A
         </Avatar>
         <Text className='author'>{displayName}</Text>
-        <Text className='date'>{createdAt}</Text>
+        <Text className='date'>{formatDate(createdAt?.seconds)}</Text>
       </div>
       <div className=''>
         <Text className='content'>{text}</Text>
