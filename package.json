@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon index.js",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "repository": {
     "type": "git",
@@ -15,5 +19,9 @@
   "bugs": {
     "url": "https://github.com/hoanglonggap00/ChatApp/issues"
   },
-  "homepage": "https://github.com/hoanglonggap00/ChatApp#readme"
+  "homepage": "https://github.com/hoanglonggap00/ChatApp#readme",
+  "dependencies": {
+    "concurrently": "^6.2.1",
+    "express": "^4.17.1"
+  }
 }
