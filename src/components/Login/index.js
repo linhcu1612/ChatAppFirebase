@@ -11,16 +11,22 @@ const fbProvider = new firebase.auth.FacebookAuthProvider();
 
 export default function Login() {
   const handleFbLogin = async () => {
-    const { additionalUserInfo, user } = await auth.signInWithPopup(fbProvider);
-    if (additionalUserInfo?.isNewUser) {
-      addDocument("users", {
-        displayName: user.displayName,
-        email: user.email,
-        photoURL: user.photoURL,
-        uid: user.uid,
-        providerId: additionalUserInfo.providerId,
-        keywords: generateKeywords(user.displayName),
-      });
+    try {
+      const { additionalUserInfo, user } = await auth.signInWithPopup(
+        fbProvider
+      );
+      if (additionalUserInfo?.isNewUser) {
+        addDocument("users", {
+          displayName: user.displayName,
+          email: user.email,
+          photoURL: user.photoURL,
+          uid: user.uid,
+          providerId: additionalUserInfo.providerId,
+          keywords: generateKeywords(user.displayName),
+        });
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 
