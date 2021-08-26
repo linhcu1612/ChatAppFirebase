@@ -37,8 +37,6 @@ function DebounceSelect({
     };
   }, []);
 
-  console.log(options);
-
   return (
     <Select
       labelInValue

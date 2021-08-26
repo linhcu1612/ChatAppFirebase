@@ -1,18 +1,19 @@
 /** @format */
 
-import React, { useMemo, useContext, useState } from "react";
-import useFirestore from "hooks/useFirestore";
+import React, { useState } from "react";
+import useFirestore from "../hooks/useFirestore";
 import { AuthContext } from "./AuthProvider";
 
 export const AppContext = React.createContext();
 
 export default function AppProvider({ children }) {
   const [isAddRoomVisible, setIsAddRoomVisible] = useState(false);
-  const [isInviteMemberVisible, setInviteMemberVisible] = useState(false);
+  const [isInviteMemberVisible, setIsInviteMemberVisible] = useState(false);
   const [selectedRoomId, setSelectedRoomId] = useState("");
-  const { uid } = useContext(AuthContext);
 
-  const roomsCondition = useMemo(() => {
+  const { uid } = React.useContext(AuthContext);
+
+  const roomsCondition = React.useMemo(() => {
     return {
       fieldName: "members",
       operator: "array-contains",
@@ -22,12 +23,12 @@ export default function AppProvider({ children }) {
 
   const rooms = useFirestore("rooms", roomsCondition);
 
-  const selectedRoom = useMemo(
+  const selectedRoom = React.useMemo(
     () => rooms.find((room) => room.id === selectedRoomId) || {},
     [rooms, selectedRoomId]
   );
 
-  const usersCondition = useMemo(() => {
+  const usersCondition = React.useMemo(() => {
     return {
       fieldName: "uid",
       operator: "in",
@@ -36,6 +37,12 @@ export default function AppProvider({ children }) {
   }, [selectedRoom.members]);
 
   const members = useFirestore("users", usersCondition);
+
+  const clearState = () => {
+    setSelectedRoomId("");
+    setIsAddRoomVisible(false);
+    setIsInviteMemberVisible(false);
+  };
 
   return (
     <AppContext.Provider
@@ -48,7 +55,8 @@ export default function AppProvider({ children }) {
         selectedRoomId,
         setSelectedRoomId,
         isInviteMemberVisible,
-        setInviteMemberVisible,
+        setIsInviteMemberVisible,
+        clearState,
       }}>
       {children}
     </AppContext.Provider>
