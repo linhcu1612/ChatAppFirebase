@@ -77,7 +77,7 @@ async function fetchUserList(search, curMembers) {
 export default function AddRoomModal() {
   const {
     isInviteMemberVisible,
-    setInviteMemberVisible,
+    setIsInviteMemberVisible,
     selectedRoomId,
     selectedRoom,
   } = useContext(AppContext);
@@ -90,13 +90,13 @@ export default function AddRoomModal() {
     roomRef.update({
       members: [...selectedRoom.members, ...value.map((val) => val.value)],
     });
-    setInviteMemberVisible(false);
+    setIsInviteMemberVisible(false);
     form.resetFields();
   };
 
   const handleCancel = () => {
     form.resetFields();
-    setInviteMemberVisible(false);
+    setIsInviteMemberVisible(false);
   };
 
   return (

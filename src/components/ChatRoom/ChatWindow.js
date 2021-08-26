@@ -77,7 +77,7 @@ const FormStyled = styled(Form)`
 `;
 
 export default function ChatWindow() {
-  const { selectedRoom, members, setInviteMemberVisible } =
+  const { selectedRoom, members, setIsInviteMemberVisible } =
     useContext(AppContext);
   const { uid, photoURL, displayName } = useContext(AuthContext);
 
@@ -89,7 +89,7 @@ export default function ChatWindow() {
   const [form] = Form.useForm();
 
   const handleInviteButton = () => {
-    setInviteMemberVisible(true);
+    setIsInviteMemberVisible(true);
   };
 
   const [inputValue, setInputValue] = useState("");
